@@ -1,5 +1,5 @@
 use crate::error::Error;
-use std::{io::BufRead, usize};
+use std::io::BufRead;
 pub fn run<R>(input: R) -> Result<(), Error>
 where
     R: BufRead,
