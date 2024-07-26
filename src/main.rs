@@ -1,4 +1,4 @@
-use aoc2019::{self, bail, day01, day02, Error, Reader};
+use aoc2019::{bail, day01, day02, day3, Error, Reader};
 use clap::Parser;
 use std::{fs, io, path::PathBuf, process::exit};
 
@@ -46,6 +46,7 @@ fn run() -> Result<(), Error> {
     match args.day {
         1 => day01::run(input)?,
         2 => day02::run(input)?,
+        3 => day3::run(input)?,
         n if n > 2 && n < 26 => bail!("Day {} not implemented", n),
         _ => bail!("Only day > 1 and < 26 allowed"),
     };

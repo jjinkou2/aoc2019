@@ -1,5 +1,6 @@
 pub mod day01;
 pub mod day02;
+pub mod day3;
 
 #[macro_use]
 mod macros;
