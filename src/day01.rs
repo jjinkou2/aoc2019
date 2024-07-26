@@ -1,16 +1,6 @@
 use crate::error::Error;
 use std::io::BufRead;
-pub fn run<R>(input: R) -> Result<(), Error>
-where
-    R: BufRead,
-{
-    let (answer1, answer2) = run2(input)?;
-    println!("{answer1}");
-    println!("{answer2}");
-    Ok(())
-}
-
-pub fn run2<R>(mut input: R) -> Result<(usize, usize), Error>
+pub fn run<R>(mut input: R) -> Result<(String, String), Error>
 where
     R: BufRead,
 {
@@ -29,7 +19,7 @@ where
 
         buffer.clear();
     }
-    Ok((total1, total2))
+    Ok((format!("{total1}"), format!("{total2}")))
 }
 
 pub fn part_one(n: usize) -> usize {
@@ -59,14 +49,14 @@ mod tests {
     fn test_01() {
         let test_cases = &[
             //(input,  expexted1, expected2)
-            ("12", 2, 2),
-            ("14", 2, 2),
-            ("1969", 654, 966),
-            ("100756", 33583, 50346),
+            ("12", "2", "2"),
+            ("14", "2", "2"),
+            ("1969", "654", "966"),
+            ("100756", "33583", "50346"),
         ];
         for (input, expected1, expected2) in test_cases {
             let reader = io::BufReader::new(input.as_bytes());
-            let (actual1, actual2) = run2(reader).unwrap();
+            let (actual1, actual2) = run(reader).unwrap();
             assert_eq!(*expected1, actual1);
             assert_eq!(*expected2, actual2);
         }

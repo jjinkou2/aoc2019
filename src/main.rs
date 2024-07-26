@@ -43,12 +43,13 @@ fn run() -> Result<(), Error> {
             Reader::Stdin(guard)
         }
     };
-    match args.day {
+    let (answer1, answer2) = match args.day {
         1 => day01::run(input)?,
         2 => day02::run(input)?,
         3 => day3::run(input)?,
         n if n > 2 && n < 26 => bail!("Day {} not implemented", n),
         _ => bail!("Only day > 1 and < 26 allowed"),
     };
+    println!("{answer1}\n{answer2}");
     Ok(())
 }

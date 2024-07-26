@@ -1,7 +1,7 @@
 use crate::error::Error;
 use std::io::BufRead;
 
-pub fn run<R>(_input: R) -> Result<(), Error>
+pub fn run<R>(_input: R) -> Result<(String, String), Error>
 where
     R: BufRead,
 {
