@@ -4,8 +4,9 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+atoi = "2.0"
 clap = { version = "4.5.9", features = ["derive"] }
-criterion = "0.5.1"
+criterion = "0.5"
 
 [[bench]]
 name = "benchmark"
