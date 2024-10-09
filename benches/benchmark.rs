@@ -1,4 +1,4 @@
-use aoc2019::{self, day01, day02, day03};
+use aoc2019::{self, day01, day02, day03, day04};
 use criterion::{criterion_group, criterion_main, Criterion};
 use std::{fs, io, time::Duration};
 
@@ -29,11 +29,20 @@ fn target03(c: &mut Criterion) {
         })
     });
 }
+fn target04(c: &mut Criterion) {
+    let day04 = fs::read_to_string("data/04.txt").unwrap();
+    c.bench_function("day_04", |b| {
+        b.iter(|| {
+            let reader = io::BufReader::new(day04.as_bytes());
+            day04::run(reader)
+        })
+    });
+}
 criterion_group! {
     name = benches;
     // This can be any expression that returns a `Criterion` object.
     config = Criterion::default().warm_up_time(Duration::from_secs(5));
-    targets = target01, target02, target03
+    targets = target01, target02, target03, target04
 }
 
 criterion_main!(benches);
