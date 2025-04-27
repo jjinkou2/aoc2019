@@ -70,15 +70,19 @@ enum PreviousDigit {
     Two(u8),
     ThreeeOrMore(u8),
 }
-fn parse_digits(n: usize) -> Result<[u8; 6], Error> {
+fn parse_digits(mut n: usize) -> Result<[u8; 6], Error> {
     if !(100_000..=999_999).contains(&n) {
         bail!("invalid digits")
     }
     let mut output = [0u8; 6];
-    for i in 0..6 {
-        let foio = n / 10usize.pow(i as u32);
-        let bar = (foio / 10) * 10;
-        output[5 - i] = (foio - bar) as u8;
+    let mut i = 5;
+    loop {
+        output[i] = (n % 5) as u8;
+        n /= 10;
+        if i == 0 {
+            break;
+        };
+        i -= 1;
     }
     Ok(output)
 }
@@ -105,8 +109,6 @@ where
 }
 mod tests {
 
-    use super::*;
-
     #[test]
     fn test_04() {
         let test_cases = &[
@@ -119,7 +121,7 @@ mod tests {
         ];
 
         for (n, expected1, expected2) in test_cases {
-            let (actual1, actual2) = is_valid(*n).unwrap();
+            let (actual1, actual2) = crate::day04::is_valid(*n).unwrap();
             assert_eq!(actual1, *expected1);
             assert_eq!(actual2, *expected2);
         }

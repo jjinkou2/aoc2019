@@ -51,7 +51,7 @@ mod reader {
         File(io::BufReader<fs::File>),
         Stdin(io::StdinLock<'a>),
     }
-    impl<'a> Read for Reader<'a> {
+    impl Read for Reader<'_> {
         fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
             match self {
                 Self::File(file) => file.read(buf),
@@ -59,7 +59,7 @@ mod reader {
             }
         }
     }
-    impl<'a> BufRead for Reader<'a> {
+    impl BufRead for Reader<'_> {
         fn fill_buf(&mut self) -> io::Result<&[u8]> {
             match self {
                 Self::File(file) => file.fill_buf(),
