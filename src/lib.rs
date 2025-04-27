@@ -6,6 +6,8 @@ pub mod day04;
 #[macro_use]
 mod macros;
 
+mod computer;
+
 pub use self::error::Error;
 pub use self::reader::Reader;
 
